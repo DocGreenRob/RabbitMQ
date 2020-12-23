@@ -10,7 +10,7 @@ namespace Producer2
 		static void Main(string[] args)
 		{
 			var message = GetMessage(args);
-			for(var i=0; i<10; i++)
+			for (var i = 0; i < 10; i++)
 			{
 				PublishMessage($"[{i + 1}] :: {message}");
 			}
@@ -23,6 +23,12 @@ namespace Producer2
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
+				channel.QueueDeclare(queue: queueName,
+								 durable: true,
+								 exclusive: false,
+								 autoDelete: false,
+								 arguments: null);
+
 				var properties = channel.CreateBasicProperties();
 				properties.Persistent = true;
 

@@ -21,6 +21,8 @@ namespace Consumer2._1
 									 exclusive: false,
 									 autoDelete: false,
 									 arguments: null);
+				channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+				Console.WriteLine(" [*] Waiting for messages.");
 
 				var consumer = new EventingBasicConsumer(channel);
 				consumer.Received += (model, ea) =>
@@ -30,8 +32,9 @@ namespace Consumer2._1
 					Console.WriteLine(" [x] Received {0}", message);
 
 					Thread.Sleep(5000);
-					channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 					Console.WriteLine(" [x] Done");
+
+					channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 				};
 				channel.BasicConsume(queue: queueName,
 									 autoAck: false,
