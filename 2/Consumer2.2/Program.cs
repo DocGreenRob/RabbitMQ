@@ -34,7 +34,7 @@ namespace Consumer2._2
 					Console.WriteLine(" [x] Done");
 				};
 				channel.BasicConsume(queue: queueName,
-									 autoAck: true,
+									 autoAck: false,
 									 consumer: consumer);
 
 				Console.WriteLine(" Press [enter] to exit.");

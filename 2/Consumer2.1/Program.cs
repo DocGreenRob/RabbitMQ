@@ -11,7 +11,6 @@ namespace Consumer2._1
 		private readonly static string queueName = "task_queue-2";
 		static void Main(string[] args)
 		{
-
 			var factory = new ConnectionFactory() { HostName = "localhost" };
 
 			using (var connection = factory.CreateConnection())
